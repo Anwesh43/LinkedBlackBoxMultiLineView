@@ -77,14 +77,16 @@ class BlackBoxMultiLineView(ctx : Context) : View(ctx) {
 
     private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
-    override fun onDraw(canvas : Canvas) {
+    private val renderer : Renderer = Renderer(this)
 
+    override fun onDraw(canvas : Canvas) {
+        renderer.render(canvas, paint)
     }
 
     override fun onTouchEvent(event : MotionEvent) : Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-
+                renderer.handleTap()
             }
         }
         return true
@@ -211,7 +213,7 @@ class BlackBoxMultiLineView(ctx : Context) : View(ctx) {
         private val animator : Animator = Animator(view)
         private val bbml : BlackBoxMultiLine = BlackBoxMultiLine(0)
 
-        fun renderer(canvas : Canvas, paint : Paint) {
+        fun render(canvas : Canvas, paint : Paint) {
             canvas.drawColor(backColor)
             animator.animate {
                 bbml.update {i, scl ->
