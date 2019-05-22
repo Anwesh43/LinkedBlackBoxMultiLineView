@@ -19,8 +19,9 @@ val scGap : Float = 0.05f
 val scDiv : Double = 0.51
 val strokeFactor : Int = 90
 val sizeFactor : Float = 2.9f
-val foreColor : Int = Color.BLACK
+val foreColor : Int = Color.parseColor("#212121")
 val backColor : Int = Color.parseColor("#BDBDBD")
+val delay : Long = 20
 
 fun Int.inverse() : Float = 1f / this
 fun Float.scaleFactor() : Float = Math.floor(this / scDiv).toFloat()
@@ -118,7 +119,7 @@ class BlackBoxMultiLineView(ctx : Context) : View(ctx) {
             if (animated) {
                 cb()
                 try {
-                    Thread.sleep(50)
+                    Thread.sleep(delay)
                     view.invalidate()
                 } catch(ex : Exception) {
 
@@ -215,6 +216,7 @@ class BlackBoxMultiLineView(ctx : Context) : View(ctx) {
 
         fun render(canvas : Canvas, paint : Paint) {
             canvas.drawColor(backColor)
+            bbml.draw(canvas, paint)
             animator.animate {
                 bbml.update {i, scl ->
                     animator.stop()
