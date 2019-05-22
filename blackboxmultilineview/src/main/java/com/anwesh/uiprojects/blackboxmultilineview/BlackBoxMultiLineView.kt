@@ -228,4 +228,13 @@ class BlackBoxMultiLineView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : BlackBoxMultiLineView {
+            val view : BlackBoxMultiLineView = BlackBoxMultiLineView(activity)
+            activity.setContentView(view)
+            return view 
+        }
+    }
 }
