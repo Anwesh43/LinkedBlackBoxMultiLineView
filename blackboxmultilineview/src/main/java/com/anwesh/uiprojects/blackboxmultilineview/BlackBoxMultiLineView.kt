@@ -234,7 +234,7 @@ class BlackBoxMultiLineView(ctx : Context) : View(ctx) {
         fun create(activity : Activity) : BlackBoxMultiLineView {
             val view : BlackBoxMultiLineView = BlackBoxMultiLineView(activity)
             activity.setContentView(view)
-            return view 
+            return view
         }
     }
 }
