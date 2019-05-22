@@ -205,4 +205,25 @@ class BlackBoxMultiLineView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : BlackBoxMultiLineView) {
+
+        private val animator : Animator = Animator(view)
+        private val bbml : BlackBoxMultiLine = BlackBoxMultiLine(0)
+
+        fun renderer(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            animator.animate {
+                bbml.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            bbml.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
